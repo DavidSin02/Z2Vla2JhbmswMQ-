@@ -1,0 +1,85 @@
+<!doctype html><html lang=cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=referrer content="no-referrer"><link rel=dns-prefetch href=https://i.geekbank.cf/><title>Java中的List和ListIterator的详解 | 极客快訊</title><meta property="og:title" content="Java中的List和ListIterator的详解 - 极客快訊"><meta property="og:type" content="article"><meta property="og:locale" content="cn"><meta property="og:image" content><link rel=alternate hreflang=x-default href=https://geekbank.cf/tw/%e7%a7%91%e6%8a%80/cfca9a6c.html><link rel=alternate hreflang=zh-tw href=https://geekbank.cf/tw/%e7%a7%91%e6%8a%80/cfca9a6c.html><link rel=alternate hreflang=zh-cn href=https://geekbank.cf/cn/%e7%a7%91%e6%8a%80/cfca9a6c.html><link rel=alternate hreflang=zh-hk href=https://geekbank.cf/tw/%e7%a7%91%e6%8a%80/cfca9a6c.html><link rel=alternate hreflang=zh-mo href=https://geekbank.cf/tw/%e7%a7%91%e6%8a%80/cfca9a6c.html><link rel=alternate hreflang=zh-my href=https://geekbank.cf/cn/%e7%a7%91%e6%8a%80/cfca9a6c.html><link rel=alternate hreflang=zh-sg href=https://geekbank.cf/cn/%e7%a7%91%e6%8a%80/cfca9a6c.html><link rel=canonical href=https://geekbank.cf/tw/%e7%a7%91%e6%8a%80/cfca9a6c.html><meta property="article:published_time" content="2020-11-14T21:05:53+08:00"><meta property="article:modified_time" content="2020-11-14T21:05:53+08:00"><meta name=Keywords content><meta name=description content="Java中的List和ListIterator的详解"><meta name=author content="极客快訊"><meta property="og:url" content="/cn/%E7%A7%91%E6%8A%80/cfca9a6c.html"><link rel=apple-touch-icon sizes=180x180 href=../../apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=../../favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=../../favicon-16x16.png><link rel=manifest href=../../site.webmanifest><link rel=mask-icon href=../../safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#ffc40d"><meta name=theme-color content="#ffffff"><link rel=stylesheet href=https://geekbank.cf/css/normalize.css><link rel=stylesheet href=https://geekbank.cf/css/style.css><script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js></script><script type=text/javascript src=https://geekbank.cf/js/jqthumb.min.js></script><script data-ad-client=ca-pub-3525055026201463 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></head><body><header id=header class=clearfix><div class=container><div class=col-group><div class=site-name><h1><a id=logo href>🤓 极客快讯 Geek Bank</a></h1><p class=description>为你带来最全的科技知识 🧡</p></div><div><nav id=nav-menu class=clearfix><a class=current href>猜你喜歡</a>
+<a href=../../tw/categories/%E7%A7%91%E6%8A%80.html title=科技>科技</a>
+<a href=../../tw/categories/%E9%81%8A%E6%88%B2.html title=遊戲>遊戲</a>
+<a href=../../tw/categories/%E7%A7%91%E5%AD%B8.html title=科學>科學</a></nav></div></div></div></header><div id=body><div class=container><div class=col-group><div class=col-8 id=main><div class=res-cons><article class=post><header><h1 class=post-title>Java中的List和ListIterator的详解</h1></header><date class="post-meta meta-date">2020-11-14</date><div class=post-meta><span>|</span>
+<span class=meta-category><a href=cn/categories/%E7%A7%91%E6%8A%80.html>科技</a></span></div><div class=post-content><pre>package list;import java.util.ArrayList;import java.util.List;import java.util.ListIterator;/* * 本类讲解的是Java中的List接口和Iterator接口的用法 * ArrayList实现类创建对象 */public class ListDemo {	public static void main(String[] args) {		//List集合时一个有序且可重复的集合，集合中的每个元素都有其对应的索引顺序		//即可通过索引来访问集合中的元素，默认按照元素添加的先后顺序排列索引		//List是Collection接口的子类接口，具有Collection接口里的所有方法		//那么除了继承父类接口中的方法以外，List还具有自己的一些访问索引的方法		List books = new ArrayList();		books.add("Java");		books.add("C#");		books.add("Html");		books.add("C#");		books.add("Javascript");		System.out.println("最初的数据为"+books+"\n");				//集合中索引从0开始 最大索引为集合的size-1		//add(索引,值);将元素插入到索引位置		books.add(1,"Html5");		System.out.println("在索引1处添加元素之后的值为："+books+"\n");				//for循环遍历List集合		for(int i=0;i<books.size();i++) { //在list集合中还提供了一个get(i)方法i 为索引 system.out.print(books.get(i)+"\t"); } system.out.println("\n"); //list中的remove方法 是根据索引删除 语法为remove(i) i为集合中元素的索引从0开始 books.remove(1);//删除索引为1的数据 即删除了html5这个元素 system.out.println("删除索引为1之后的集合为："+books+"\n"); //remove中的索引参数不可为负数 也不能为大于等于集合size的数 //例如 books.remove(-1) 和books.remove(books.size()) 或者 比size更大的整数 //remove方法去删除指定值的元素 remove(对象) //此时 在集合中由于有多个c#元素 ，所以当尝试用remove去删除 //指定元素是 默认先删除第一个 books.remove("c#"); //set(i,element) 方法为 替换指定索引的元素 books.set(0, "java编程思想第四版"); system.out.println("索引为0的元素被替换之后的集合为："+books+"\n"); //list集合中的indexof(对象) 返回对象o在集合中第一次出现的索引位置 没有查找到返回-1 system.out.println("c#字符串在集合中第一次出现的索引为："+books.indexof("c#")); //list集合中的lastindexof(对象) 返回对象o在集合中最后一次出现的索引位置 没有查找到返回-1 system.out.println("c#字符串在集合中最后一次出现的索引为："+books.lastindexof("c#")); //查找不存在的对象 返回-1 system.out.println("sqlserver字符串在集合中第一次出现的索引为："+books.indexof("sqlserver")+"\n"); //sublist(int fromindex, int toindex)返回从索引frominde到toindex之间的元素 //包含fromindex不包含toindex system.out.println("输出books集合中从索引0到索引2之间的元素:"+books.sublist(0, 2)+"\n"); //list除了拥有iterator迭代器之外 还自己定义了一个反向迭代器listiterator //listiterator不仅有iterator的所有方法 //还具有一个自己的特点那就是反向迭代器就是说可以总最后一个往前面一个一个元素的迭代 //那么接下来的例子我们来看一下什么是正向和反向的区别 system.out.println("-------------下列是正向迭代从前到后------------"); listiterator it1=books.listIterator(); while(it1.hasnext()) { system.out.print(it1.next().tostring()+"\t"); } system.out.println("\n-------------下列是反向迭代从前到后------------"); //hasprevious()方法 返回该迭代器关联的集合是否有上一个元素 while(it1.hasprevious()) { //previous()方法返回该迭代器的上一个元素 system.out.print(it1.previous().tostring()+"\t"); } }}</pre>
+        </div>
+        
+        
+
+        <div class="post-meta meta-tags">
+            
+            <ul class=clearfix>
+                
+                <li><a>&#39;Java&#39;,&#39;List&#39;,&#39;ListIterator&#39;</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+</div>
+
+                </div>
+
+                <div id=secondary>
+    <section class=widget>
+        <form id=search action=//www.google.com/search method=get accept-charset=utf-8 target=_blank _lpchecked=1>
+      
+      <input type=text name=q maxlength=20 placeholder=搜索>
+      <input type=hidden name=sitesearch value=geekbank.cf>
+      <button type=submit>🔍</button>
+</form>
+    </section>
+
+    <section class=widget>
+        <h3 class=widget-title>最新文章 ⚡</h3>
+<ul class=widget-list>
+  
+  
+</ul>
+
+    </section>
+
+    
+
+    
+
+    <section class=widget>
+        <h3 class=widget-title>其他</h3>
+        <ul class=widget-list>
+            <li><a href=TOS.html>使用條款</a></li>
+            <li><a href=CommentPolicy.html>留言政策</a></li>
+            <li><a href=mailto:gdnews@tuta.io rel=nofollow>DMCA</a></li>
+            <li><a href=mailto:gdnews@tuta.io rel=nofollow>聯絡我們</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+    <footer id=footer>
+    <div class=container>
+        &copy; 2020 <a href>极客快訊</a>
+    </div>
+</footer>
+
+
+
+<script type=text/javascript>window.MathJax={tex2jax:{inlineMath:[['$','$']],processEscapes:true}};</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+<a id=rocket href=#top></a>
+<script type=text/javascript src=https://kknews.cf/js/totop.js async></script>
+
+<script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-146415161-2','auto');ga('send','pageview');}</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+ 
+
+<script type=text/javascript src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5e508ed9e4e698bb"></script>
+
+
+
+</body>
+
+</html>
